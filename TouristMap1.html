@@ -4,12 +4,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<!-- Link library leaflet -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
 crossorigin="" />
 
- <!-- W3 CSS template -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 
  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
@@ -17,9 +15,9 @@ integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0v
 crossorigin="">
 </script>
 
- <style>
-#mapid {
-height: 800px;
+<style>
+ #mapid {
+ height: 800px;
 }
 </style>
 
@@ -44,8 +42,7 @@ height: 800px;
 </table>
 </div>
 </div>
-
-<!-- เรียกแผนที่ขึ้นมาแสดง -->
+ 
 <script>
   //เรียกแผนที่
 var map = L.map("mapid").setView([17.69645,100.947166666666661],8);
@@ -282,7 +279,6 @@ cont += "</table>";
 console.log(cont);
 document.getElementById("content").innerHTML = cont;
 
-//create polygon
 var polygonGeoJson = {
   "type": "FeatureCollection",
   "features": [
@@ -394,13 +390,12 @@ layer.closePopup();
 },
 });
 
-//group point+ploygon layer
+
 var overlays = {
     สถานที่ท่องเที่ยว:tourLayer,
     ขอบเขตอุทยาน:polygonLayer
-
 };
-  //Create layer control
+  
   L.control.layers(baseMaps,overlays).addTo(map);
 </script>
 
