@@ -1,0 +1,865 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!-- Link library leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin="" />
+
+ <!-- W3 CSS template -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin="">
+  </script>
+
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap" rel="stylesheet">
+
+  <body style = "background-color : #CCFFCC ;">
+
+ <style type="text/css">
+ #mapid {
+   height: 800px;
+}
+  body{
+  font-family: 'Mitr', sans-serif;
+}
+ </style>
+
+ <title>Tourist map</title>
+</head>
+<body>
+
+  <h1><font color="#003300">แผนที่สถานที่ท่องเที่ยว จังหวัดเลยและจังหวัดพิษณุโลก</font></h1>
+  โดย ณัฐวัฒน์ โอนอ่อน รหัสนิสิต 62103010456
+<!-- แบ่งหน้าจอ -->
+<div class="w3-row">
+<div id="mapid" class="w3-half"></div>
+<div id="content" class="w3-half">
+<table class="w3-table w3-striped">
+ <tr>
+   <th>ชื่อแหล่งท่องเที่ยว</th>
+   <th>ประเภท</th>
+   <th>ระดับ</th>
+ </tr>
+ <tr>
+   <td>น้ำตก A</td>
+   <td>ธรรมชาติ</td>
+   <td>A</td>
+ </tr>
+</table>
+</div>
+</div>
+
+<!-- เรียกแผนที่ขึ้นมาแสดง -->
+<script>
+//เรียกแผนที่
+  var map = L.map("mapid").setView([17.29295893954944, 101.29883518561307],8);
+//based map1
+  var osm = L.tileLayer("https://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png").addTo(map);
+//based map2
+  var gsat = L.tileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}").addTo(map);
+//group layers(1+2)
+  var baseMaps ={
+  //ชื่อชั้นข้อมูล:ตัวแปร
+  GoogleSat:gsat,
+  OSM:osm,
+};
+
+//add data
+var tourpoint = {
+type: "FeatureCollection",
+name: "tour_plk",
+crs: {
+type: "name",
+properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" },
+  },
+features: [
+{
+type: "Feature",
+properties: {
+Name: "อุทยานแห่งชาติภูเรือ",
+Type: "อุทยานและวนอุทยาน",
+FID_1: 1358.0,
+CHANGWAT: "เลย",
+PROVINCE_1: "loei",
+REGION: "ภาคตะวันออกเฉียงเหนือ",
+level: "⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[101.344667255214, 17.51509655]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "น้ำตกหมันแดง",
+Type: "ธรรมชาติ",
+FID_1: 1357.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "loei",
+REGION: "ภาคเหนือ",
+level: "⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[101.064693387214, 16.9416304952]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "เขาโปกโล้น",
+Type: "ธรรมชาติ",
+FID_1: 1362.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "⭐⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.820027987516, 17.3077600964409]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "วัดพระศรีรัตนมหาธาตุราชวรมหาวิหาร",
+Type: "วัฒนธรรม",
+FID_1: 1364.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "⭐⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.263709154056, 16.8578849767811]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "อุทยานแห่งชาติทุ่งแสลงหลวง",
+Type: "อุทยานและวนอุทยาน",
+FID_1: 1355.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.880643165636, 16.5970954825923]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "ล่องแพแก่งไฮ",
+Type: "กิจกรรมพิเศษ",
+FID_1: 1365.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.75101981703, 16.9830213728627]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "บ้านมุง",
+Type: "วัฒนธรรม",
+FID_1: 733.0,
+CHANGWAT: "พิษณุโลก",
+PROVINCE_1: "Phitsanulok",
+REGION: "ภาคเหนือ",
+level: "⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[100.691232505142, 16.5621574728891]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "สกายวอล์ค เชียงคาน",
+Type: "ธรรมชาติ",
+FID_1: 1359.0,
+CHANGWAT: "เลย",
+PROVINCE_1: "loei",
+REGION: "ภาคตะวันออกเฉียงเหนือ",
+level: "⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[101.554271609937, 17.8203584612723]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "พระธาตุศรีสองรัก",
+Type: "วัฒนธรรม",
+FID_1: 603.0,
+CHANGWAT: "เลย",
+PROVINCE_1: "Loei",
+REGION: "ภาคตะวันออกเฉียงเหนือ",
+level: "⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[101.141083978699, 17.2710855056125]],
+},
+},
+{
+type: "Feature",
+properties: {
+Name: "ต้นไม้รูปหัวใจ เนินมะปราง",
+Type: "กิจกรรมพิเศษ",
+FID_1: 611.0,
+CHANGWAT: "เลย",
+PROVINCE_1: "Loei",
+REGION: "ภาคตะวันออกเฉียงเหนือ",
+level: "⭐⭐⭐",
+},
+geometry: { type: "MultiPoint", coordinates: [[100.625796360011, 16.7254509761909]] },
+},
+{
+type: "Feature",
+properties: {
+Name: "อุทยานแห่งชาติภูกระดึง",
+Type: "อุทยานและวนอุทยาน",
+FID_1: 1370.0,
+CHANGWAT: "เลย",
+PROVINCE_1: "loei",
+REGION: "ภาคตะวันออกเฉียงเหนือ",
+level: "⭐⭐⭐⭐",
+},
+geometry: {
+type: "MultiPoint",
+coordinates: [[101.84349257976696, 16.888565514714156]],
+},
+},
+],
+};
+
+//add marker and popup
+var tourLayer = L.geoJSON(tourpoint, {
+pointToLayer: function (feature, latlng) {
+return L.marker(latlng).bindPopup(feature.properties.Name);
+},
+onEachFeature: function (feature, layer) {
+layer.on("mouseover", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.add("w3-red");
+});
+
+ layer.on("mouseout", function () {
+document
+.getElementById(feature.properties.FID_1)
+.classList.remove("w3-red");
+});
+},
+}).addTo(map);
+
+//link table with popup and Marker
+var cont = "";
+cont += "<table class='w3-table w3-striped'>";
+cont += "<tr>";
+cont += "<th>ชื่อแหล่งท่องเที่ยว</th>";
+cont += "<th>ประเภท</th>";
+cont += "<th>ระดับ</th>";
+cont += "</tr>";
+for (let i in tourpoint.features) {
+cont += "<tr id=" + tourpoint.features[i].properties.FID_1 + ">";
+cont += "<td>" + tourpoint.features[i].properties.Name + "</td>";
+cont += "<td>" + tourpoint.features[i].properties.Type + "</td>";
+cont += "<td>" + tourpoint.features[i].properties.level + "</td>";
+cont += "</tr>";
+}
+cont += "</table>";
+console.log(cont);
+document.getElementById("content").innerHTML = cont;
+
+//create polgonGeoJson
+var polygonLayer = L.geoJSON(polygonGeoJson, {
+style: function (feature) {
+return { color: feature.properties.color };
+},
+onEachFeature: function (feature, layer) {
+layer.bindPopup(feature.properties.name);
+
+ layer.on("mouseover", function () {
+layer.openPopup();
+});
+
+ layer.on("mouseout", function () {
+layer.closePopup();
+});
+},
+});
+
+var polygonGeoJson = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#7a1f1f",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#e5b8d2",
+        "fill-opacity": 0.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              100.953369140625,
+              17.570720568038833
+            ],
+            [
+              100.90393066406249,
+              17.58119402650602
+            ],
+            [
+              100.86547851562499,
+              17.539296556236707
+            ],
+            [
+              100.843505859375,
+              17.476432197195518
+            ],
+            [
+              100.8599853515625,
+              17.45547257997284
+            ],
+            [
+              100.909423828125,
+              17.424028633877878
+            ],
+            [
+              100.931396484375,
+              17.35063837604883
+            ],
+            [
+              100.95886230468749,
+              17.340151652399424
+            ],
+            [
+              101.0247802734375,
+              17.28770905062193
+            ],
+            [
+              101.0577392578125,
+              17.256236314156425
+            ],
+            [
+              101.1016845703125,
+              17.19852235364461
+            ],
+            [
+              101.085205078125,
+              17.114542657151997
+            ],
+            [
+              101.063232421875,
+              17.00426178629037
+            ],
+            [
+              101.05224609374999,
+              16.941214960202657
+            ],
+            [
+              101.0687255859375,
+              16.914939206301646
+            ],
+            [
+              101.151123046875,
+              17.046281225389063
+            ],
+            [
+              101.217041015625,
+              17.083040486191322
+            ],
+            [
+              101.2994384765625,
+              17.114542657151997
+            ],
+            [
+              101.3433837890625,
+              17.151288449816747
+            ],
+            [
+              101.414794921875,
+              17.167034421464095
+            ],
+            [
+              101.48071289062499,
+              17.083040486191322
+            ],
+            [
+              101.51916503906249,
+              17.00426178629037
+            ],
+            [
+              101.62353515625,
+              16.99900869321349
+            ],
+            [
+              101.678466796875,
+              16.97799484888579
+            ],
+            [
+              101.678466796875,
+              16.883403464236842
+            ],
+            [
+              101.7059326171875,
+              16.783505561927786
+            ],
+            [
+              101.8048095703125,
+              16.762467717941604
+            ],
+            [
+              101.8597412109375,
+              16.783505561927786
+            ],
+            [
+              102.05749511718749,
+              16.867633616803836
+            ],
+            [
+              102.01904296874999,
+              16.920194650443886
+            ],
+            [
+              102.0684814453125,
+              16.951724234434437
+            ],
+            [
+              102.12890625,
+              16.99375545289456
+            ],
+            [
+              102.1014404296875,
+              17.062036080716222
+            ],
+            [
+              102.0135498046875,
+              17.14079039331665
+            ],
+            [
+              102.05749511718749,
+              17.193274736612818
+            ],
+            [
+              102.095947265625,
+              17.18277905643184
+            ],
+            [
+              102.052001953125,
+              17.26148214345649
+            ],
+            [
+              101.986083984375,
+              17.340151652399424
+            ],
+            [
+              101.9915771484375,
+              17.434510551522894
+            ],
+            [
+              102.0849609375,
+              17.465952690145564
+            ],
+            [
+              102.1234130859375,
+              17.54977183258917
+            ],
+            [
+              102.0849609375,
+              17.628317078494
+            ],
+            [
+              102.030029296875,
+              17.675427818339383
+            ],
+            [
+              102.0465087890625,
+              17.848061398396343
+            ],
+            [
+              102.030029296875,
+              17.95783210227242
+            ],
+            [
+              102.052001953125,
+              18.05186707354763
+            ],
+            [
+              102.0904541015625,
+              18.166730410221938
+            ],
+            [
+              102.073974609375,
+              18.198043686762652
+            ],
+            [
+              101.9970703125,
+              18.124970639386515
+            ],
+            [
+              101.898193359375,
+              18.025751281356246
+            ],
+            [
+              101.77734374999999,
+              18.057089766648648
+            ],
+            [
+              101.7388916015625,
+              17.947380678685217
+            ],
+            [
+              101.7169189453125,
+              17.8846591795428
+            ],
+            [
+              101.62353515625,
+              17.8846591795428
+            ],
+            [
+              101.5521240234375,
+              17.837603506092073
+            ],
+            [
+              101.5521240234375,
+              17.790535393588975
+            ],
+            [
+              101.49169921875,
+              17.74345487051766
+            ],
+            [
+              101.42578124999999,
+              17.732990849540233
+            ],
+            [
+              101.3543701171875,
+              17.649256706812025
+            ],
+            [
+              101.22802734375,
+              17.555009243667573
+            ],
+            [
+              101.14562988281249,
+              17.481671724450752
+            ],
+            [
+              101.07421875,
+              17.5078670964508
+            ],
+            [
+              101.00830078125,
+              17.54977183258917
+            ],
+            [
+              100.953369140625,
+              17.570720568038833
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#45600b",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#a4f4bb",
+        "fill-opacity": 0.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.0577392578125,
+              16.920194650443886
+            ],
+            [
+              101.0577392578125,
+              17.093541801797898
+            ],
+            [
+              101.10717773437499,
+              17.193274736612818
+            ],
+            [
+              101.041259765625,
+              17.256236314156425
+            ],
+            [
+              100.9368896484375,
+              17.33490806580805
+            ],
+            [
+              100.9149169921875,
+              17.38209494787749
+            ],
+            [
+              100.8819580078125,
+              17.450232298814154
+            ],
+            [
+              100.8380126953125,
+              17.497389400663824
+            ],
+            [
+              100.8929443359375,
+              17.57595737307669
+            ],
+            [
+              100.96435546875,
+              17.57595737307669
+            ],
+            [
+              100.9808349609375,
+              17.63355221367443
+            ],
+            [
+              101.0028076171875,
+              17.68066158373626
+            ],
+            [
+              100.986328125,
+              17.732990849540233
+            ],
+            [
+              100.9259033203125,
+              17.691128657307438
+            ],
+            [
+              100.8599853515625,
+              17.696361965403323
+            ],
+            [
+              100.8270263671875,
+              17.63355221367443
+            ],
+            [
+              100.7611083984375,
+              17.56548361143177
+            ],
+            [
+              100.6732177734375,
+              17.50262832408579
+            ],
+            [
+              100.579833984375,
+              17.434510551522894
+            ],
+            [
+              100.45898437499999,
+              17.397821207326782
+            ],
+            [
+              100.2886962890625,
+              17.36636733709516
+            ],
+            [
+              100.23376464843749,
+              17.3034434020238
+            ],
+            [
+              100.23376464843749,
+              17.22475820662464
+            ],
+            [
+              100.1129150390625,
+              17.214264312027566
+            ],
+            [
+              100.0140380859375,
+              17.156537255486093
+            ],
+            [
+              99.9481201171875,
+              17.13554114256562
+            ],
+            [
+              99.99755859375,
+              17.067287403767885
+            ],
+            [
+              100.074462890625,
+              16.99900869321349
+            ],
+            [
+              100.096435546875,
+              16.92544994794521
+            ],
+            [
+              100.03051757812499,
+              16.88865978738161
+            ],
+            [
+              99.920654296875,
+              16.825574258731486
+            ],
+            [
+              99.86572265625,
+              16.74142754700361
+            ],
+            [
+              99.8876953125,
+              16.699340234594537
+            ],
+            [
+              99.9151611328125,
+              16.636191878397664
+            ],
+            [
+              99.97558593749999,
+              16.583552354072015
+            ],
+            [
+              100.08544921874999,
+              16.583552354072015
+            ],
+            [
+              100.17333984375,
+              16.594081412718474
+            ],
+            [
+              100.17883300781249,
+              16.657243645360776
+            ],
+            [
+              100.2227783203125,
+              16.58881695544584
+            ],
+            [
+              100.283203125,
+              16.536164463838773
+            ],
+            [
+              100.3436279296875,
+              16.56249250837488
+            ],
+            [
+              100.4534912109375,
+              16.520365912442116
+            ],
+            [
+              100.5084228515625,
+              16.57828760863749
+            ],
+            [
+              100.5633544921875,
+              16.557227187102736
+            ],
+            [
+              100.56884765624999,
+              16.45189060541708
+            ],
+            [
+              100.634765625,
+              16.34649680535433
+            ],
+            [
+              100.689697265625,
+              16.38866117075937
+            ],
+            [
+              100.777587890625,
+              16.45189060541708
+            ],
+            [
+              100.8544921875,
+              16.515099441440785
+            ],
+            [
+              100.8544921875,
+              16.594081412718474
+            ],
+            [
+              100.8819580078125,
+              16.65198092045974
+            ],
+            [
+              100.909423828125,
+              16.636191878397664
+            ],
+            [
+              100.931396484375,
+              16.704601656395944
+            ],
+            [
+              100.92041015625,
+              16.783505561927786
+            ],
+            [
+              101.0137939453125,
+              16.85186245321658
+            ],
+            [
+              101.0577392578125,
+              16.920194650443886
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
+
+var polygonLayer = L.geoJSON(polygonGeoJson, {
+style: function (feature) {
+return { fillcolor: feature.properties.color };
+},
+onEachFeature: function (feature, layer) {
+layer.bindPopup(feature.properties.name);
+
+ layer.on("mouseover", function () {
+layer.openPopup();
+});
+
+ layer.on("mouseout", function () {
+   layer.closePopup();
+});
+},
+});
+
+//group point+polygon layer
+var overlays = {
+  สถานที่ท่องเที่ยว:tourLayer,
+  ขอบเขตอุทยาน:polygonLayer
+};
+
+//Create layer control
+L.control.layers(baseMaps,overlays).addTo(map);
+
+</script>
+</body>
+</html>
